@@ -16,7 +16,8 @@
     <script type="text/javascript">
 
     var color = d3.scale.quantize()
-      .range(colorbrewer.YlOrBr[8]);
+      .range(["rgb(173,221,142)","rgb(120,198,121)","rgb(65,171,93)","rgb(35,132,67)","rgb(0,104,55)","rgb(0,69,41)"]);
+      // .range(colorbrewer.YlOrBr[7]);
 
     d3.csv("top_payments.csv", function(data){
       var svg = d3.select("body")
@@ -42,7 +43,7 @@
         .data(data)
         .enter().append("rect")
         .attr("y", function(d, i) { return i * 20; })
-        .attr("width", function(d) { return x(d.amount) })
+        .attr("width", function(d) { return (x(d.amount)) })
         .attr("height", 20 )
         .attr("fill", function(d) {
         //Get data value

@@ -30,13 +30,13 @@
 
       color.domain([
         d3.min(data, function(d){ return d.amount }),
-        d3.max(data, function(d){ return d.amount })
+        d3.max(data, function(d){ return d.amount * 0.1 })
         ])
 
       chart.selectAll("div")
         .data(data)
         .enter().append("div")
-        .style("width", function(d) { return d.amount * 0.0010 + "px"; })
+        .style("width", function(d) { return d.amount * 0.001 + "px"; })
         .html(function(d) { return d.name + "</br> payment: " + d.amount + " Euro"; })
         .style("background-color", function(d) {
         //Get data value

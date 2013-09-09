@@ -28,7 +28,7 @@
       var chart = d3.select("svg")
         .attr("class", "chart")
         .attr("width", 720)
-        .attr("length", 20 * data.length);
+        .attr("length", 40 * data.length);
 
       var x = d3.scale.linear()
         .domain([0, d3.max(data, function(d){ return d.amount })])
@@ -42,9 +42,9 @@
       chart.selectAll("rect")
         .data(data)
         .enter().append("rect")
-        .attr("y", function(d, i) { return i * 20; })
-        .attr("width", function(d) { return (x(d.amount)) })
-        .attr("height", 20 )
+        .attr("y", function(d, i) { return i * 40; })
+        .attr("width", function(d) { return (x(d.amount)) * 0.1 })
+        .attr("height", 40 )
         .attr("fill", function(d) {
         //Get data value
           var value = d.amount;

@@ -12,6 +12,7 @@
           margin: 10px;
           color: white;
           height: 40px;
+          width: 800px;
       }
 
     </style>
@@ -30,8 +31,12 @@
 
       color.domain([
         d3.min(data, function(d){ return d.amount }),
-        d3.max(data, function(d){ return d.amount * 0.1 })
+        d3.max(data, function(d){ return d.amount })
         ])
+
+      var x = d3.scale.linear()
+        .domain([0, d3.max(data, function(d){ return d.amount })])
+        .range([0, 420]);
 
       chart.selectAll("div")
         .data(data)

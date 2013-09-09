@@ -15,4 +15,13 @@ class Recipient < Sequel::Model
     end
   end
 
+  #calculate total payment a recipient receives in a specified year
+  def total_payment_amount_by_year(year)
+    all_payments = Payment.where(year_id: Year.id_for(year)).
+      where(recipient_id: self.id).all
+    all_payments.inject(0.0) do |sum, payment|
+      sum = sum + payment.amount_euro
+    end
+  end
+
 end

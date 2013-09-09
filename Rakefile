@@ -22,6 +22,14 @@ namespace :db do
     DB = Sequel.postgres("farmsubsidy_performance")
     Sequel::Migrator.run(DB, './db/migrations', :use_transactions=>true)
   end
+
+  task :run_any_new_migration do
+    require "sequel"
+    Sequel.extension :migration
+
+    DB = Sequel.postgres("farmsubsidy_performance")
+    Sequel::Migrator.run(DB, './db/migrations', :use_transactions=>true)
+  end
 end
 
 

@@ -1,6 +1,7 @@
 require 'csv'
 require 'rubygems'
 require 'sequel'
+require 'json'
 
 # connect to an postgres database
 DB = Sequel.postgres("farmsubsidy_performance")
@@ -8,7 +9,7 @@ DB = Sequel.postgres("farmsubsidy_performance")
 project_root = File.dirname(File.absolute_path(__FILE__))
 Dir.glob(project_root + "/models/*.rb").each{|f| require f}
 
-payments_sorted = Payment.sorted(2007,200)
+payments_sorted = Payment.sorted(2009,20)
 
 top_payments = []
 
@@ -27,6 +28,12 @@ CSV.open("top_payments.csv", "w", :force_quotes => true) do |csv|
   end
 end
 
+@top_payments_json = []
+@top_payments_json = top_payments.to_json
+
 puts "our results are: "
+puts "from csv:"
 system("cat top_payments.csv")
+puts "\nFrom Json object:"
+puts @top_payments_json
 

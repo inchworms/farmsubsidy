@@ -7,7 +7,6 @@
     <script src="http://d3js.org/colorbrewer.v1.min.js"></script>
     <style type="text/css">
       .chart rect {
-        stroke: white;
       }
 
     </style>
@@ -31,19 +30,19 @@
         .attr("length", 40 * data.length);
 
       var x = d3.scale.linear()
-        .domain([0, d3.max(data, function(d){ return d.amount })])
-        .range([0, 420]);
+        .domain([0, d3.max(data, function(d){ return +d.amount })])
+        .rangeRound([0, 420]);
 
       color.domain([
-        d3.min(data, function(d){ return d.amount }),
-        d3.max(data, function(d){ return d.amount * 0.1 })
+        d3.min(data, function(d){ return +d.amount }),
+        d3.max(data, function(d){ return +d.amount })
         ]);
 
       chart.selectAll("rect")
         .data(data)
         .enter().append("rect")
-        .attr("y", function(d, i) { return i * 40; })
-        .attr("width", function(d) { return (x(d.amount)) * 0.1 })
+        .attr("y", function(d, i) { return i * 41; })
+        .attr("width", function(d) { return (x(+d.amount)) })
         .attr("height", 40 )
         .attr("fill", function(d) {
         //Get data value

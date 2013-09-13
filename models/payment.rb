@@ -1,6 +1,7 @@
 # Create a Payments model.
 class Payment < Sequel::Model
-  many_to_one :recipients
+  many_to_one :recipient
+  many_to_one :year
 
 
   def self.number

@@ -28,6 +28,7 @@ CSV.open("top_payments.csv", "w", :force_quotes => true) do |csv|
   end
 end
 
+
 @top_payments_json = []
 @top_payments_json = top_payments.to_json
 
@@ -37,3 +38,12 @@ system("cat top_payments.csv")
 puts "\nFrom Json object:"
 puts @top_payments_json
 
+# puts "our results are: "
+# system("cat top_payments.csv")
+
+
+recipient_id = 2337
+recipient = Recipient[:id=> recipient_id]
+
+puts "total amount of payment from one recipient with id #{recipient_id}:"
+puts recipient.total_payment_amount

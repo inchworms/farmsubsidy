@@ -1,6 +1,5 @@
 # Create a Recipients model.
 class Recipient < Sequel::Model
-  many_to_one :years
   one_to_many :payments
 
   def total_payments_by_recipient(recipient_id)
@@ -15,6 +14,12 @@ class Recipient < Sequel::Model
     end
   end
 
+  def total_payment_amount
+    self.payments.inject(0.0) do |sum,payment|
+      sum = sum + payment.amount_euro
+    end
+  end
+
   #calculate total payment a recipient receives in a specified year
   def total_payment_amount_by_year(year)
     all_payments = Payment.where(year_id: Year.id_for(year)).
@@ -23,5 +28,14 @@ class Recipient < Sequel::Model
       sum = sum + payment.amount_euro
     end
   end
+
+  # is the same as:
+  # def total_payment_amount
+  #   sum = 0.0
+  #   self.payments.each do |payment|
+  #     sum = sum + payment.amount_euro
+  #   end
+  #   sum
+  # end
 
 end
